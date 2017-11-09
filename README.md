@@ -6,3 +6,4 @@ This repository contains all redBorder platform logstash rules
 - sshd
 - iptables
 - nginx
+- dnsmasq

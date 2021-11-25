@@ -8,9 +8,8 @@ Summary: Logstash cookbook used to install redborder logstash rules
 
 License: AGPL 3.0
 URL: https://github.com/redBorder/cookbook-logstash-rules
-Source0: %{name}-%{version}.tar
+Source0: %{name}-%{version}.tar.gz
 
-BuildRequires: rsync
 
 %description
 %{summary}
@@ -22,12 +21,20 @@ BuildRequires: rsync
 %build
 
 %install
+
+
 mkdir -p %{buildroot}%{rules_path}
 
+cp -f -r  dnsmasq %{buildroot}%{rules_path}
+cp -f -r  iptables %{buildroot}%{rules_path}
+cp -f -r  nginx %{buildroot}%{rules_path}
+cp -f -r  sshd %{buildroot}%{rules_path}
 
-rsync -a --exclude={'README.md','Makefile','.gitignore'} ../../ %{buildroot}/share/logstash-rules
+
+#install -D -m 0644 dnsmasq %{buildroot}%{rules_path}dnsmasq
 
 chmod -R 0755 %{buildroot}%{rules_path}
+
 #install -D -m 0644 README.md %{buildroot}/var/chef/cookbooks/logstash-rules/README.md
 
 %pre
@@ -36,7 +43,10 @@ chmod -R 0755 %{buildroot}%{rules_path}
 
 %files
 %defattr(0755,root,root)
-%{rules_path}
+%{rules_path}/dnsmasq
+%{rules_path}/iptables
+%{rules_path}/nginx
+%{rules_path}/sshd
 
 %doc
 

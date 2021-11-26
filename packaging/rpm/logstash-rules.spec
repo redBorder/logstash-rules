@@ -30,6 +30,7 @@ cp -f nginx %{buildroot}%{rules_path}
 cp -f sshd %{buildroot}%{rules_path}
 
 chmod -R 0644 %{buildroot}%{rules_path}
+chmod 0755 %{buildroot}%{rules_path}
 
 %pre
 
@@ -41,6 +42,8 @@ chmod -R 0644 %{buildroot}%{rules_path}
 %{rules_path}/iptables
 %{rules_path}/nginx
 %{rules_path}/sshd
+%defattr(0755,root,root)
+%{rules_path}
 
 %doc
 
